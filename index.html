@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTrack - Personal Fitness Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path d="m18 11-5.5-5.5a2 2 0 1 0-2.8 2.8l5.5 5.5"></path><path d="m11 18-5.5-5.5a2 2 0 1 0-2.8 2.8l5.5 5.5"></path><path d="m20.5 4.5 1 1-6 6-1-1 6-6z"></path><path d="m4.5 20.5 1 1 6-6-1-1-6 6z"></path><path d="M12 12 12 12"></path></svg>
+                <span>FitTrack</span>
+            </div>
+            
+            <div class="nav-links" id="navLinks">
+                <a href="#home" class="nav-link active" data-target="home">Home</a>
+                <a href="#dashboard" class="nav-link" data-target="dashboard">Dashboard</a>
+                <a href="#bmi" class="nav-link" data-target="bmi">BMI</a>
+                <a href="#extras" class="nav-link" data-target="extras">Extras</a>
+                <a href="#about" class="nav-link" data-target="about">About</a>
+            </div>
+
+            <div class="nav-controls">
+                <button id="themeToggle" class="icon-btn" aria-label="Toggle Theme">
+                    <svg id="moonIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+                    <svg id="sunIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon hidden"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
+                </button>
+                <button id="mobileMenuBtn" class="icon-btn mobile-only" aria-label="Menu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Home Section (Full width hero, outside main container) -->
+    <section id="home" class="section-container active-section">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Train Smarter.<br>Track Simpler.</h1>
+                <p>FitTrack is the simplest, most intuitive workout tracking experience. Log your exercises, track your streaks, and hit your fitness goals completely offline.</p>
+                <button id="startTrackingBtn" class="btn btn-primary btn-large ripple">Start Tracking</button>
+            </div>
+        </div>
+
+        <!-- Features Grid Container -->
+        <div class="home-container">
+            <div class="features-grid">
+                <div class="glass-card feature-card">
+                    <div class="feature-icon text-primary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-large"><path d="M12 20h9M3 20v-8c0-2.2 1.8-4 4-4h10c2.2 0 4 1.8 4 4v8M3 10h18M7 15h2M11 15h2M15 15h2"></path></svg>
+                    </div>
+                    <h3>Workout Log</h3>
+                    <p class="text-muted text-sm mt-05">Log your exercises, sets, reps, and weights with an interface designed to stay out of your way.</p>
+                </div>
+                <div class="glass-card feature-card">
+                    <div class="feature-icon text-secondary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-large"><path d="M12 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+                    </div>
+                    <h3>Progress Charts</h3>
+                    <p class="text-muted text-sm mt-05">Visualize your progress with custom weekly activity charts and stats tracking.</p>
+                </div>
+                <div class="glass-card feature-card">
+                    <div class="feature-icon text-accent">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-large"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v8M8 12h8"></path></svg>
+                    </div>
+                    <h3>BMI Calculator</h3>
+                    <p class="text-muted text-sm mt-05">Calculate your BMI using metric units and track historical trends offline.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <!-- Toast Container -->
+        <div id="toastContainer" class="toast-container"></div>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section-container hidden-section">
+            <h2 class="section-title">Dashboard</h2>
+            
+            <!-- Stats Counters Row -->
+            <div class="dashboard-stats-row mb-2">
+                <div class="glass-card stat-card-new">
+                    <div class="icon-box bg-purple-light">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2" class="icon"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+                    </div>
+                    <div class="stat-info">
+                        <h4 class="text-muted text-sm">Current Streak</h4>
+                        <h2 class="text-xl font-bold" id="dashStreakValue">0 Days</h2>
+                    </div>
+                </div>
+
+                <div class="glass-card stat-card-new">
+                    <div class="icon-box bg-yellow-light">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2" class="icon"><path d="m18 11-5.5-5.5a2 2 0 1 0-2.8 2.8l5.5 5.5"></path><path d="m11 18-5.5-5.5a2 2 0 1 0-2.8 2.8l5.5 5.5"></path></svg>
+                    </div>
+                    <div class="stat-info">
+                        <h4 class="text-muted text-sm">Total Exercises</h4>
+                        <h2 class="text-xl font-bold" id="dashTotalExercises">0</h2>
+                    </div>
+                </div>
+
+                <div class="glass-card stat-card-new">
+                    <div class="icon-box bg-green-light">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" class="icon"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </div>
+                    <div class="stat-info">
+                        <h4 class="text-muted text-sm">Total Duration</h4>
+                        <h2 class="text-xl font-bold" id="statTotalMinutes">0 min</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-layout-new">
+                <!-- Left Column (Tracker + Today's Workouts) -->
+                <div class="dashboard-main-col">
+                    <!-- Log New Exercise Form -->
+                    <div class="glass-card form-container mb-2">
+                        <h3>Log New Exercise</h3>
+                        <form id="exerciseForm">
+                            <div class="form-group">
+                                <label for="exName">Exercise</label>
+                                <select id="exName" required>
+                                    <option value="" disabled selected>Select an exercise</option>
+                                    <option value="Push Ups">Push Ups</option>
+                                    <option value="Pull Ups">Pull Ups</option>
+                                    <option value="Squats">Squats</option>
+                                    <option value="Running">Running</option>
+                                    <option value="Walking">Walking</option>
+                                    <option value="Cycling">Cycling</option>
+                                    <option value="Yoga">Yoga</option>
+                                    <option value="Plank">Plank</option>
+                                    <option value="Jump Rope">Jump Rope</option>
+                                    <option value="Deadlift">Deadlift</option>
+                                    <option value="Bench Press">Bench Press</option>
+                                    <option value="Shoulder Press">Shoulder Press</option>
+                                    <option value="Custom">Custom Exercise...</option>
+                                </select>
+                            </div>
+                            <div class="form-group hidden" id="customExGroup">
+                                <label for="customExName">Custom Exercise Name</label>
+                                <input type="text" id="customExName" placeholder="Enter name">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="exSets">Sets</label>
+                                    <input type="number" id="exSets" min="1" placeholder="e.g. 3">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exReps">Reps</label>
+                                    <input type="number" id="exReps" min="1" placeholder="e.g. 10">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exDuration">Duration (minutes)</label>
+                                <input type="number" id="exDuration" min="1" placeholder="e.g. 30">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exNotes">Notes (optional)</label>
+                                <textarea id="exNotes" rows="2" placeholder="How did it feel?"></textarea>
+                            </div>
+
+                            <input type="hidden" id="exId">
+
+                            <button type="submit" class="btn btn-primary w-full ripple" id="saveExBtn">Add Exercise</button>
+                            <button type="button" class="btn btn-outline w-full mt-1 hidden" id="cancelEditBtn">Cancel Edit</button>
+                        </form>
+                    </div>
+
+                    <!-- Today's Workouts Card -->
+                    <div class="glass-card today-workouts-card">
+                        <div class="flex-between mb-1">
+                            <h3>Today's Workouts</h3>
+                        </div>
+                        <div id="dashTodayExercisesList" class="exercises-list empty-state-container">
+                            <div class="empty-state">
+                                <p>No exercises logged today yet.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column (Stats Chart + Calendar + Quote) -->
+                <div class="dashboard-side-col">
+                    <!-- Daily Goal Settings & Progress -->
+                    <div class="glass-card mb-2">
+                        <div class="flex-between">
+                            <h3>Daily Goal Progress</h3>
+                            <span id="dashGoalPercentage" class="text-secondary font-bold">0%</span>
+                        </div>
+                        <div class="progress-bar-container mt-1">
+                            <div class="progress-bar" id="dashProgressBar" style="width: 0%"></div>
+                        </div>
+                        <p class="text-sm text-muted mt-1" id="dashGoalText">0 / 5 Exercises Completed</p>
+                        
+                        <div class="form-row align-end mt-1 pt-1" style="border-top: 1px solid var(--border-color); margin-top: 1rem; padding-top: 1rem;">
+                            <div class="form-group mb-0 flex-1">
+                                <label for="dailyGoalSelect" class="text-xs">Daily Target</label>
+                                <select id="dailyGoalSelect" style="padding: 0.5rem">
+                                    <option value="3">3 Exercises</option>
+                                    <option value="5">5 Exercises</option>
+                                    <option value="8">8 Exercises</option>
+                                    <option value="10">10 Exercises</option>
+                                </select>
+                            </div>
+                            <button id="saveGoalBtn" class="btn btn-secondary ripple" style="padding: 0.5rem 1rem">Save</button>
+                        </div>
+                    </div>
+
+                    <!-- Weekly Activity Chart -->
+                    <div class="glass-card mb-2">
+                        <h3>Weekly Activity Chart</h3>
+                        <div class="css-chart-container mt-1" id="activityChart">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Calendar Grid Card -->
+                    <div class="glass-card mb-2 calendar-container">
+                        <div class="calendar-header">
+                            <button class="icon-btn" id="prevMonthBtn">&lt;</button>
+                            <h3 id="calendarMonthYear">Month Year</h3>
+                            <button class="icon-btn" id="nextMonthBtn">&gt;</button>
+                        </div>
+                        <div class="calendar-grid">
+                            <div class="day-name">Sun</div><div class="day-name">Mon</div><div class="day-name">Tue</div>
+                            <div class="day-name">Wed</div><div class="day-name">Thu</div><div class="day-name">Fri</div><div class="day-name">Sat</div>
+                            <!-- Calendar days populated by JS -->
+                        </div>
+                        <div class="calendar-legend mt-2">
+                            <div class="legend-item"><span class="color-box box-green"></span> Completed</div>
+                            <div class="legend-item"><span class="color-box box-red"></span> Missed</div>
+                            <div class="legend-item"><span class="color-box box-current"></span> Today</div>
+                        </div>
+                    </div>
+
+                    <!-- Quote Card -->
+                    <div class="glass-card quote-card bg-gradient-primary text-white">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="icon-large opacity-50 mb-1"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.99c1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path></svg>
+                        <p id="dailyQuoteText" class="font-italic text-sm">"The only bad workout is the one that didn't happen."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BMI Section -->
+        <section id="bmi" class="section-container hidden-section">
+            <h2 class="section-title">BMI Calculator</h2>
+            <div class="tracker-layout">
+                <div class="glass-card form-container">
+                    <h3>Calculate BMI</h3>
+                    <form id="bmiForm">
+                        <div class="form-group">
+                            <label for="bmiHeight">Height (cm)</label>
+                            <input type="number" id="bmiHeight" min="50" max="300" required placeholder="e.g. 175">
+                        </div>
+                        <div class="form-group">
+                            <label for="bmiWeight">Weight (kg)</label>
+                            <input type="number" id="bmiWeight" min="20" max="400" required placeholder="e.g. 70">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-full ripple">Calculate</button>
+                    </form>
+
+                    <div id="bmiResultCard" class="bmi-result-card hidden mt-2 text-center">
+                        <h4 class="text-muted">Your BMI</h4>
+                        <p class="text-2xl font-bold mt-0" id="bmiValueDisplay">--</p>
+                        <p class="badge mt-1 inline-block" id="bmiCategoryBadge">--</p>
+                        <div class="bmi-scale-container mt-2">
+                            <div class="bmi-scale-bar"></div>
+                            <div class="bmi-scale-dot" id="bmiScaleDot"></div>
+                            <div class="flex-between text-xs text-muted mt-05">
+                                <span>15</span>
+                                <span>18.5</span>
+                                <span>25</span>
+                                <span>30</span>
+                                <span>40</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <h3>BMI History</h3>
+                    <div id="bmiHistoryList" class="history-list mt-1">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Extras Section -->
+        <section id="extras" class="section-container hidden-section">
+            <h2 class="section-title">Extras & Settings</h2>
+            
+            <div class="tracker-layout">
+                <div class="flex-col gap-2">
+                    <!-- Daily Quote -->
+                    <div class="glass-card quote-card bg-gradient-primary text-white">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="icon-large opacity-50 mb-1"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.99c1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path></svg>
+                        <p id="dailyQuoteText" class="font-italic text-lg">"The only bad workout is the one that didn't happen."</p>
+                    </div>
+
+                    <!-- Water Tracker -->
+                    <div class="glass-card text-center">
+                        <h3>Water Tracker (Today)</h3>
+                        <p class="text-sm text-muted mb-1">Aim for 8 glasses a day.</p>
+                        <div class="water-glasses" id="waterGlassesContainer">
+                            <!-- Populated by JS -->
+                        </div>
+                        <p class="mt-1 font-bold text-primary"><span id="waterCount">0</span> / 8 Glasses</p>
+                    </div>
+                </div>
+
+                <!-- Data Management -->
+                <div class="glass-card h-fit">
+                    <h3>Data Management</h3>
+                    <p class="text-sm text-muted mb-1">Manage your Local Storage data.</p>
+                    <div class="flex-col gap-1 mt-1">
+                        <button id="exportDataBtn" class="btn btn-outline w-full flex-center gap-sm">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            Export Data (JSON)
+                        </button>
+                        
+                        <div class="file-input-wrapper">
+                            <button class="btn btn-outline w-full flex-center gap-sm" onclick="document.getElementById('importDataInput').click()">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                                Import Data (JSON)
+                            </button>
+                            <input type="file" id="importDataInput" accept=".json" class="hidden">
+                        </div>
+
+                        <button id="clearDataBtn" class="btn btn-danger w-full mt-1">Reset All Data</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section-container hidden-section">
+            <h2 class="section-title">About FitTrack</h2>
+            
+            <div class="about-grid">
+                <!-- Developer Profile Card -->
+                <div class="glass-card developer-card text-center">
+                    <div class="dev-avatar-wrapper">
+                        <div class="dev-avatar">KG</div>
+                    </div>
+                    <h3 class="mt-1">Kaushal Gupta</h3>
+                    <p class="text-sm text-primary font-bold">Developer</p>
+                    <p class="text-xs text-muted mt-1">I built FitTrack as a web programming course project. My goal was to make a clean, lightweight workout tracker that saves everything locally in the browser and respects your privacy.</p>
+                </div>
+
+                <!-- Project Purpose and Arch -->
+                <div class="glass-card flex-col gap-2">
+                    <div>
+                        <h3>Why FitTrack?</h3>
+                        <p class="mt-05 text-sm text-muted">FitTrack is a simple workout tracker made for a college summer project. It helps you log your exercises and view your weekly progress. Everything runs completely offline in your browser, meaning no signup, no databases, and no internet connection is required.</p>
+                    </div>
+
+                    <!-- Flow Chart Section -->
+                    <div>
+                        <h3>How it Works</h3>
+                        <p class="text-xs text-muted mb-1">A simple breakdown of how your workout data is processed and shown offline:</p>
+                        
+                        <div class="flow-chart">
+                            <div class="flow-step">
+                                <div class="flow-step-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                                </div>
+                                <div class="flow-step-title">1. Add Workout</div>
+                                <div class="flow-step-desc">You type in your sets, reps, and duration on the dashboard.</div>
+                            </div>
+                            
+                            <div class="flow-arrow">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </div>
+
+                            <div class="flow-step">
+                                <div class="flow-step-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                                </div>
+                                <div class="flow-step-title">2. Saved Locally</div>
+                                <div class="flow-step-desc">Your browser saves the data directly to Local Storage.</div>
+                            </div>
+
+                            <div class="flow-arrow">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </div>
+
+                            <div class="flow-step">
+                                <div class="flow-step-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                </div>
+                                <div class="flow-step-title">3. Instant Update</div>
+                                <div class="flow-step-desc">Your dashboard stats, weekly chart, and calendar update immediately.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tech Cards -->
+                    <div>
+                        <h3>Technologies Used</h3>
+                        <div class="tech-cards mt-1">
+                            <div class="tech-card">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon text-accent"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                                <span>HTML5</span>
+                            </div>
+                            <div class="tech-card">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon text-primary"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                                <span>CSS3</span>
+                            </div>
+                            <div class="tech-card">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon text-secondary"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                                <span>ES6 JS Modules</span>
+                            </div>
+                            <div class="tech-card">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon text-muted"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                                <span>Local Storage API</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Goal Completion Modal -->
+    <div id="completionModal" class="modal-overlay hidden">
+        <div class="modal-content glass-card text-center">
+            <div class="modal-icon text-secondary mb-1 scale-in">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-xl"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <h2 class="text-xl mb-1">🎉 Congratulations!</h2>
+            <p>You completed today's workout goal.</p>
+            <p class="text-sm text-muted mt-1">Keep your streak alive!</p>
+            <button id="closeModalBtn" class="btn btn-primary mt-2">Awesome</button>
+        </div>
+    </div>
+
+    <footer class="footer text-center">
+        <p>FitTrack &copy; <span id="currentYear"></span>. College Summer Project.</p>
+        <p class="text-sm text-muted mt-05">Developed with HTML, CSS, & Vanilla JS</p>
+        <button id="backToTopBtn" class="icon-btn mt-1" aria-label="Back to Top">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon"><path d="m18 15-6-6-6 6"></path></svg>
+        </button>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/storage.js" type="module"></script>
+    <script src="js/notification.js" type="module"></script>
+    <script src="js/theme.js" type="module"></script>
+    <script src="js/app.js" type="module"></script>
+</body>
+</html>
